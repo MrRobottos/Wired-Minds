@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wired Minds — Intelligent Farming Systems</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green-dark: #3B6D11;
+  --green-mid: #639922;
+  --green-light: #EAF3DE;
+  --green-pale: #f4f9ee;
+  --teal-dark: #0F6E56;
+  --teal-light: #E1F5EE;
+  --amber-dark: #854F0B;
+  --amber-light: #FAEEDA;
+  --coral-dark: #993C1D;
+  --coral-light: #FAECE7;
+  --coral-border: #D85A30;
+  --coral-deep: #4A1B0C;
+  --text-primary: #1a1a18;
+  --text-secondary: #4a4a46;
+  --text-tertiary: #888780;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f2;
+  --bg-page: #fafaf7;
+  --border: rgba(0,0,0,0.10);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+a { color: inherit; text-decoration: none; }
+
+/* Hero */
+.hero { padding-bottom: 2rem; border-bottom: 0.5px solid var(--border); margin-bottom: 0; }
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 6px;
+}
+.hero-title {
+  font-size: 32px; font-weight: 600; color: var(--text-primary);
+  line-height: 1.15; margin-bottom: 0.5rem;
+}
+.hero-title .accent { color: var(--green-dark); }
+.hero-tagline {
+  font-size: 15px; color: var(--text-secondary); line-height: 1.65;
+  max-width: 580px; margin-bottom: 1.5rem;
+}
+.stat-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin-bottom: 1.25rem;
+}
+.stat-card {
+  background: var(--bg-secondary); border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+}
+.stat-label {
+  font-size: 10px; color: var(--text-tertiary); text-transform: uppercase;
+  letter-spacing: 0.09em; margin-bottom: 5px;
+}
+.stat-val { font-size: 22px; font-weight: 600; color: var(--text-primary); }
+.stat-val.danger { color: var(--coral-dark); }
+.stat-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+
+/* Terminal */
+.terminal {
+  background: #0c1509; border-radius: var(--radius-md);
+  padding: 0.85rem 1.1rem; font-family: var(--font-mono);
+  font-size: 12.5px; color: #7ec876; margin-bottom: 0;
+  min-height: 48px; border: 0.5px solid #1e3318;
+}
+.terminal-line { display: flex; gap: 10px; line-height: 1.6; align-items: center; }
+.t-dim { color: #3a5e38; }
+.t-cursor {
+  display: inline-block; width: 8px; height: 14px;
+  background: #7ec876; vertical-align: -3px;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+/* Sections */
+.section {
+  padding: 1.75rem 0; border-bottom: 0.5px solid var(--border);
+}
+.section:last-child { border-bottom: none; }
+.section-label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.13em;
+  color: var(--text-tertiary); margin-bottom: 1.1rem;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-label i { font-size: 14px; }
+
+/* Products */
+.product-grid { display: grid; gap: 7px; }
+.product-row {
+  display: grid; grid-template-columns: 22px 1fr auto;
+  align-items: center; gap: 12px;
+  background: var(--bg-primary); border: 0.5px solid var(--border);
+  border-radius: var(--radius-md); padding: 0.7rem 1rem;
+  transition: border-color 0.15s;
+}
+.product-row:hover { border-color: rgba(0,0,0,0.22); }
+.product-icon { font-size: 16px; line-height: 1; }
+.product-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+.product-stack { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+.badge {
+  font-size: 10px; font-weight: 600; padding: 3px 9px;
+  border-radius: 20px; white-space: nowrap; letter-spacing: 0.02em;
+}
+.badge-building { background: var(--green-light); color: var(--green-dark); }
+.badge-live { background: var(--teal-light); color: var(--teal-dark); }
+.badge-progress { background: var(--amber-light); color: var(--amber-dark); }
+.badge-upcoming { background: var(--bg-secondary); color: var(--text-tertiary); }
+
+/* Build log */
+.log-grid { display: grid; }
+.log-row {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--text-secondary);
+  padding: 7px 0; border-bottom: 0.5px solid var(--border);
+}
+.log-row:last-child { border-bottom: none; }
+.log-icon { font-size: 15px; flex-shrink: 0; }
+.log-done { color: var(--green-dark); }
+.log-wip { color: #BA7517; }
+.log-todo { color: var(--text-tertiary); }
+
+/* Tech stack */
+.tech-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tech-card {
+  background: var(--bg-secondary); border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+}
+.tech-cat {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-tertiary); margin-bottom: 8px;
+}
+.tech-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag {
+  font-size: 11px; background: var(--bg-primary);
+  border: 0.5px solid var(--border); border-radius: var(--radius-sm);
+  padding: 3px 9px; color: var(--text-secondary);
+}
+
+/* Problem */
+.problem-box {
+  background: var(--coral-light); border-left: 3px solid var(--coral-border);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.1rem 1.25rem;
+}
+.problem-box p { font-size: 13.5px; color: var(--coral-deep); line-height: 1.75; }
+.problem-box strong { color: var(--coral-dark); font-weight: 600; }
+
+/* Social buttons */
+.social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.social-btn {
+  display: flex; align-items: center; gap: 9px;
+  background: var(--bg-primary); border: 0.5px solid var(--border);
+  border-radius: var(--radius-md); padding: 0.65rem 1rem;
+  font-size: 12.5px; font-weight: 500; color: var(--text-primary);
+  cursor: pointer; transition: background 0.15s, border-color 0.15s;
+  text-decoration: none;
+}
+.social-btn:hover { background: var(--bg-secondary); border-color: rgba(0,0,0,0.2); }
+.social-btn i { font-size: 17px; flex-shrink: 0; }
+.social-btn-inner { display: flex; flex-direction: column; }
+.social-handle { font-size: 10px; color: var(--text-tertiary); font-weight: 400; margin-top: 1px; }
+
+/* Founder */
+.founder-card {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--green-pale); border: 0.5px solid rgba(59,109,17,0.15);
+  border-radius: var(--radius-lg); padding: 1.1rem 1.25rem;
+}
+.founder-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--green-light); display: flex; align-items: center;
+  justify-content: center; font-weight: 600; font-size: 16px;
+  color: var(--green-dark); flex-shrink: 0;
+  border: 1.5px solid rgba(59,109,17,0.2);
+}
+.founder-name { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+.founder-roles { font-size: 11.5px; color: var(--text-secondary); line-height: 1.65; }
+.route { font-size: 12px; color: var(--text-tertiary); margin-top: 5px; }
+
+/* Responsive */
+@media (max-width: 520px) {
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .stat-row .stat-card:last-child { grid-column: 1 / -1; }
+  .social-grid { grid-template-columns: 1fr 1fr; }
+  .tech-groups { grid-template-columns: 1fr; }
+  .hero-title { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <p class="hero-eyebrow">
+      <i class="ti ti-map-pin" style="font-size:12px"></i>
+      South Africa &nbsp;·&nbsp; Agritech
+    </p>
+    <h1 class="hero-title">Wired <span class="accent">Minds</span> ⚙️</h1>
+    <p class="hero-tagline">
+      Intelligent farming systems. Built from zero. Documented publicly.
+      Every commit is a real product step — smart GPS livestock collars,
+      AI farm dashboards, and agricultural robotics.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-label">Problem cost</div>
+        <div class="stat-val danger">R1.6B</div>
+        <div class="stat-sub">livestock theft / yr in SA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Animals stolen</div>
+        <div class="stat-val danger">2.7M</div>
+        <div class="stat-sub">last recorded period</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Products active</div>
+        <div class="stat-val">4 / 6</div>
+        <div class="stat-sub">building or live</div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-line">
+        <span class="t-dim">$</span>
+        <span id="t-text"></span><span class="t-cursor"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label"><i class="ti ti-package"></i> Products in development</p>
+    <div class="product-grid">
+      <div class="product-row">
+        <span class="product-icon">🛰️</span>
+        <div>
+          <div class="product-name">Smart GPS Livestock Collar</div>
+          <div class="product-stack">Python · Arduino · NEO-6M GPS</div>
+        </div>
+        <span class="badge badge-building">Building</span>
+      </div>
+      <div class="product-row">
+        <span class="product-icon">📊</span>
+        <div>
+          <div class="product-name">AI Farm Monitoring Dashboard</div>
+          <div class="product-stack">HTML · CSS · JS · Python Flask</div>
+        </div>
+        <span class="badge badge-live">MVP live</span>
+      </div>
+      <div class="product-row">
+        <span class="product-icon">🧠</span>
+        <div>
+          <div class="product-name">AI Anomaly Detection</div>
+          <div class="product-stack">scikit-learn · pandas · NumPy</div>
+        </div>
+        <span class="badge badge-progress">In progress</span>
+      </div>
+      <div class="product-row">
+        <span class="product-icon">🤖</span>
+        <div>
+          <div class="product-name">ROS2 Agricultural Rover</div>
+          <div class="product-stack">ROS2 · Gazebo · Python</div>
+        </div>
+        <span class="badge badge-upcoming">Upcoming</span>
+      </div>
+      <div class="product-row">
+        <span class="product-icon">🔗</span>
+        <div>
+          <div class="product-name">Full IoT Integration</div>
+          <div class="product-stack">MQTT · Flask · SQLite</div>
+        </div>
+        <span class="badge badge-upcoming">Upcoming</span>
+      </div>
+      <div class="product-row">
+        <span class="product-icon">👁️</span>
+        <div>
+          <div class="product-name">Farm Security Vision</div>
+          <div class="product-stack">OpenCV · Python</div>
+        </div>
+        <span class="badge badge-upcoming">Upcoming</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label"><i class="ti ti-list-check"></i> Build log</p>
+    <div class="log-grid">
+      <div class="log-row"><i class="ti ti-circle-check log-icon log-done"></i><span>Python livestock data logger — GPS simulation v0.1</span></div>
+      <div class="log-row"><i class="ti ti-circle-check log-icon log-done"></i><span>Farm dashboard MVP — live on GitHub Pages</span></div>
+      <div class="log-row"><i class="ti ti-circle-check log-icon log-done"></i><span>SQLite database integration</span></div>
+      <div class="log-row"><i class="ti ti-circle-check log-icon log-done"></i><span>REST API backend connected to dashboard</span></div>
+      <div class="log-row"><i class="ti ti-circle-check log-icon log-done"></i><span>JSON data persistence layer</span></div>
+      <div class="log-row"><i class="ti ti-loader log-icon log-wip"></i><span>Arduino GPS hardware prototype</span></div>
+      <div class="log-row"><i class="ti ti-loader log-icon log-wip"></i><span>AI anomaly detection layer</span></div>
+      <div class="log-row"><i class="ti ti-clock log-icon log-todo"></i><span>ROS2 farm rover simulation</span></div>
+      <div class="log-row"><i class="ti ti-clock log-icon log-todo"></i><span>Full end-to-end IoT integration</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label"><i class="ti ti-tool"></i> Tech stack</p>
+    <div class="tech-groups">
+      <div class="tech-card">
+        <div class="tech-cat">Software</div>
+        <div class="tech-tags">
+          <span class="tag">Python</span><span class="tag">JavaScript</span>
+          <span class="tag">HTML/CSS</span><span class="tag">SQL</span>
+          <span class="tag">Flask</span><span class="tag">scikit-learn</span>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-cat">Hardware</div>
+        <div class="tech-tags">
+          <span class="tag">Arduino Uno</span><span class="tag">NEO-6M GPS</span>
+          <span class="tag">sensors</span><span class="tag">breadboard</span>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-cat">AI / ML</div>
+        <div class="tech-tags">
+          <span class="tag">scikit-learn</span><span class="tag">pandas</span>
+          <span class="tag">NumPy</span><span class="tag">OpenCV</span>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-cat">Robotics</div>
+        <div class="tech-tags">
+          <span class="tag">ROS2</span><span class="tag">Gazebo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label"><i class="ti ti-alert-triangle"></i> The problem</p>
+    <div class="problem-box">
+      <p>
+        Livestock theft costs the global farming sector <strong>billions annually</strong>.
+        In South Africa alone: <strong>R1.6 billion per year</strong>. 2.7 million animals
+        stolen in the last recorded period. Existing solutions are failing.<br><br>
+        Wired Minds builds real-time GPS tracking, AI anomaly detection, and automated
+        alerts that give farmers immediate visibility and response capability — at a
+        price point that works for real farms.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label"><i class="ti ti-broadcast"></i> Follow the build</p>
+    <div class="social-grid">
+      <a class="social-btn" href="https://tiktok.com/@wiredmindshq" target="_blank" rel="noopener">
+        <i class="ti ti-brand-tiktok"></i>
+        <div class="social-btn-inner"><span>TikTok</span><span class="social-handle">@wiredmindshq</span></div>
+      </a>
+      <a class="social-btn" href="https://instagram.com/wiredmindshq" target="_blank" rel="noopener">
+        <i class="ti ti-brand-instagram"></i>
+        <div class="social-btn-inner"><span>Instagram</span><span class="social-handle">@wiredmindshq</span></div>
+      </a>
+      <a class="social-btn" href="https://youtube.com/@wiredmindshq" target="_blank" rel="noopener">
+        <i class="ti ti-brand-youtube"></i>
+        <div class="social-btn-inner"><span>YouTube</span><span class="social-handle">@wiredmindshq</span></div>
+      </a>
+      <a class="social-btn" href="https://linkedin.com/company/wiredmindshq" target="_blank" rel="noopener">
+        <i class="ti ti-brand-linkedin"></i>
+        <div class="social-btn-inner"><span>LinkedIn</span><span class="social-handle">Wired Minds</span></div>
+      </a>
+      <a class="social-btn" href="https://twitter.com/wiredmindshq" target="_blank" rel="noopener">
+        <i class="ti ti-brand-twitter"></i>
+        <div class="social-btn-inner"><span>Twitter</span><span class="social-handle">@wiredmindshq</span></div>
+      </a>
+      <a class="social-btn" href="https://github.com/MrRobottos" target="_blank" rel="noopener">
+        <i class="ti ti-brand-github"></i>
+        <div class="social-btn-inner"><span>GitHub</span><span class="social-handle">MrRobottos</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label"><i class="ti ti-user"></i> Founder</p>
+    <div class="founder-card">
+      <div class="founder-avatar">DM</div>
+      <div>
+        <div class="founder-name">Darius Mushi</div>
+        <div class="founder-roles">Software engineering student · Robotics engineer · FLL/FTC judge · FIRST Global referee · Robotics mentor · Future beekeeper</div>
+        <div class="route">🇿🇦 South Africa → 🇰🇷 Korea (Oct 2026) → 🌍 Global</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const lines = [
+  'wired-minds init --mode production',
+  'gps_collar.py --device COM3 --interval 30s',
+  'anomaly_detect.py --model isolation_forest',
+  'farm_dashboard running at localhost:5000',
+  'mqtt_broker connected · 3 sensors online',
+  'git push origin main  →  building in public',
+];
+let li = 0, ci = 0, deleting = false, pause = 0;
+const el = document.getElementById('t-text');
+function tick() {
+  if (pause > 0) { pause--; setTimeout(tick, 60); return; }
+  const line = lines[li];
+  if (!deleting) {
+    el.textContent = line.slice(0, ci + 1);
+    ci++;
+    if (ci >= line.length) { deleting = true; pause = 40; }
+    setTimeout(tick, 45);
+  } else {
+    el.textContent = line.slice(0, ci - 1);
+    ci--;
+    if (ci <= 0) { deleting = false; li = (li + 1) % lines.length; pause = 8; }
+    setTimeout(tick, 22);
+  }
+}
+tick();
+</script>
+</body>
+</html>
