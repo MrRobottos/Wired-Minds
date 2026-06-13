@@ -54,7 +54,7 @@
 
 <div align="center">
 
-Built by **Darius Mushi** · Software engineering student · Robotics engineer · FLL/FTC judge · FIRST Global referee · Future beekeeper
+Built by **Darius Ramaripa** · Software engineering student · Robotics engineer · FLL/FTC judge · FIRST Global referee · Future beekeeper
 
 🇿🇦 South Africa → 🇰🇷 Korea (Oct 2026) → 🌍 Global
 
