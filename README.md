@@ -6,7 +6,7 @@
 
 **Agritech · South Africa · Building in public**
 
-[![Live Page](https://img.shields.io/badge/View%20Full%20Profile-3B6D11?style=for-the-badge&logoColor=white)](https://MrRobottos.github.io/wired-minds)
+[![Live Page](https://img.shields.io/badge/View%20Full%20Profile-3B6D11?style=for-the-badge&logoColor=white)](https://mrrobottos.github.io/Wired-Minds/)
 
 </div>
 
